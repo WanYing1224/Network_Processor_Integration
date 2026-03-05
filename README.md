@@ -3,6 +3,9 @@
 ## Project Overview
 This repository contains the source code, test scripts, and documentation for EE533 Lab 8. The objective is to design and integrate a specialized Convertible FIFO, an ARM-compatible CPU, and a custom GPU into the NetFPGA pipeline. 
 
+## 👥 Authors
+**USC EE533 Group 2 Members: [Kevelyn Lin](https://github.com/WanYing1224), [Yuxiang Luo](https://github.com/lllyxxxx), [Ian Chen](https://github.com/ichen522)**
+
 ## Directory Structure
 * `/src` - Verilog source files for the FIFO, CPU, and GPU integration.
 * `/sim` - ModelSim simulation outputs and testbenches.
