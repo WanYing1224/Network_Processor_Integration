@@ -57,7 +57,7 @@ module pc(clk, rstb, wen, stall, thread_id, next_pc, ex_branch, ex_thread_id, ex
 endmodule
 
 // ==========================================
-// 2. Instruction Memory (IMEM) - FPGA Ready
+// 2. Instruction Memory (IMEM)
 // ==========================================
 module imem_bram (clk, addr, thread_id, wen, din, inst, rstb);
     input  wire        clk;
@@ -67,27 +67,34 @@ module imem_bram (clk, addr, thread_id, wen, din, inst, rstb);
     input  wire [31:0] din;       
     output reg  [31:0] inst;
     input  wire [1:0]  thread_id;
-    
-    // Synthesis attribute to force Block RAM inference
-    (* ram_style = "block" *) reg [31:0] ram_array [0:511];
+    reg [31:0] ram_array [0:511];
 
+    integer i; 
     initial begin
-        // Load the fully merged hex file (512 words) directly
-        $readmemh("inst.mem", ram_array); 
+        // Initialize and load instructions for Thread 0
+        $readmemh("../src/inst_1.mem", ram_array, 0, 127); 
+        
+        // Critical: Copy code segment to the other 3 threads
+        for (i = 0; i < 128; i = i + 1) begin
+            ram_array[i + 128] = ram_array[i]; // Thread 1
+            ram_array[i + 256] = ram_array[i]; // Thread 2
+            ram_array[i + 384] = ram_array[i]; // Thread 3
+        end
     end
 
+    // Map thread-specific address to the physical RAM array
     wire [8:0] real_addr = (!rstb) ? addr[10:2] : {thread_id, addr[8:2]};
     
-    // Synchronous Write
+    // Correction 1: Keep write operations synchronous (Clock Edge)
     always @(posedge clk) begin
         if (wen) begin
             ram_array[real_addr] <= din;
         end
     end
 
-    // Synchronous Read (Required for FPGA Block RAM)
-    always @(posedge clk) begin
-        inst <= ram_array[real_addr];
+    // Critical Correction 2: Change read logic to combinational for pipeline timing!
+    always @(*) begin
+        inst = ram_array[real_addr];
     end
 endmodule
 
@@ -303,7 +310,7 @@ module control_unit (
 endmodule
 
 // ==========================================
-// 5. Register File (RF) - FPGA Ready
+// 5. Register File (RF) - Hardware MMU Partitioned
 // ==========================================
 module register_file (rg1, rg2, wd, wa, wen, w_thread, thread, r1data, r2data, clk, rst);
     input wire clk, rst, wen;
@@ -312,18 +319,25 @@ module register_file (rg1, rg2, wd, wa, wen, w_thread, thread, r1data, r2data, c
     input wire [31:0] wd;
     output wire [31:0] r1data, r2data;
 
-    // Synthesis attribute for Distributed RAM
-    (* ram_style = "distributed" *) reg [31:0] regfile [0:63];
-    wire [5:0] r1 = {thread, rg1};
-    wire [5:0] r2 = {thread, rg2};
-    wire [5:0] w1 = {w_thread, wa};
+    // Total 64 registers (16 registers per thread * 4 threads)
+    reg [31:0] regfile [0:63];
+    wire [5:0] r1, r2, w1;
+    assign r1 = {thread, rg1};
+    assign r2 = {thread, rg2};
+    assign w1 = {w_thread, wa};
 
+    // Internal forwarding for Register File
     assign r1data = (wen && (w1 == r1)) ? wd : regfile[r1];
     assign r2data = (wen && (w1 == r2)) ? wd : regfile[r2];
 
+    integer i;
     initial begin
-        // FPGA will auto-initialize memory to 0. 
-        // We only explicitly set the Stack Pointers (SP) for the 4 threads.
+        for (i = 0; i < 64; i = i + 1) begin
+            regfile[i] = 32'b0;
+        end
+        // Since we have hardware-level memory partitioning, all 4 threads
+        // can share the same logical memory map (0x0000 - 0x0FFF).
+        // Therefore, we initialize all Stack Pointers (SP / R13) to 0x0FFC.
         regfile[13] = 32'h0000_0FFC; // Thread 0 SP
         regfile[29] = 32'h0000_0FFC; // Thread 1 SP
         regfile[45] = 32'h0000_0FFC; // Thread 2 SP
@@ -331,7 +345,7 @@ module register_file (rg1, rg2, wd, wa, wen, w_thread, thread, r1data, r2data, c
     end
 
     always @(posedge clk) begin
-       if(wen) begin
+       if(wen)begin
             regfile[w1] <= wd;
        end
     end
@@ -586,7 +600,7 @@ module cpsr_array (clk, rstb, thread_id, update_en, alu_flags, curr_flags);
 endmodule
 
 // ==========================================
-// 11. Data Memory (DMEM) - FPGA Ready
+// 11. Data Memory (DMEM) - 4-Thread Partitioned with Data Copying
 // ==========================================
 module data_memory (
     input  wire        clk,
@@ -598,26 +612,50 @@ module data_memory (
     input  wire [1:0]  thread_id
 );
 
-    // Synthesis attribute to force Block RAM inference
-    (* ram_style = "block" *) reg [31:0] dmem [0:4095];
+    // 4096 words total (4 threads x 1024 words each)
+    reg [31:0] dmem [0:4095];
 
+    // Convert byte address to partitioned word address
     wire [11:0] word_addr = {thread_id, addr[11:2]};
 
+    integer i;
+
     initial begin
-        // Load the fully merged hex file (4096 words) directly
-        $readmemh("data_init.hex", dmem);
+        // 1. Clear all memory
+        for (i = 0; i < 4096; i = i + 1) begin
+            dmem[i] = 32'b0;
+        end
+
+        // 2. Load initial data from hex file (using relative path)
+        $readmemh("../src/data_init.hex", dmem, 0, 1023);
+
+        // 3. Debug: Display first few entries after loading
+        #1;
+        $display("==== After data_init.hex load ====");
+        for (i = 0; i < 10; i = i + 1) begin
+            $display("dmem[%0d] = %h", i, dmem[i]);
+        end
+
+        // 4. Duplicate the initial data segment for the other threads
+        for (i = 0; i < 1024; i = i + 1) begin
+            dmem[1024 + i] = dmem[i];
+            dmem[2048 + i] = dmem[i];
+            dmem[3072 + i] = dmem[i];
+        end
     end
 
-    // Synchronous Write
+    // Synchronous write
     always @(posedge clk) begin
         if (mem_write) begin
+            $display("WRITE T%0d addr=%h word_addr=%h data=%h",
+                     thread_id, addr, word_addr, write_data);
             dmem[word_addr] <= write_data;
         end
     end
 
-    // Synchronous Read (Required for FPGA Block RAM)
-    always @(posedge clk) begin
-        read_data <= dmem[word_addr];
+    // Combinational read (avoids reset-traps or timing delays)
+    always @(*) begin
+        read_data = dmem[word_addr];
     end
 
 endmodule
