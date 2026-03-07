@@ -12,7 +12,15 @@ module pipelinepc(
     // Hardware Status/Output Signals
     output wire [31:0] hw_mem_rdata,
     output wire [31:0] hw_pc,
-    output wire [31:0] hw_instr
+    output wire [31:0] hw_instr,
+	
+	// Convertible FIFO Memory-Mapped Ports
+	output wire        fifo_mode_en,
+    output wire [7:0]  fifo_addr,
+    output wire [71:0] fifo_data_out,
+    output wire        fifo_wr_en,
+    input  wire [71:0] fifo_data_in,
+    input  wire        packet_ready
 );
 
 // System reset logic: combines hardware reset with software control
@@ -256,7 +264,7 @@ ex_mem_reg EX_MEM (
 // =====================================================
 // MEM (Memory) Stage
 // =====================================================
-wire [31:0] mem_read_data;
+wire [31:0] mem_read_data_dmem;
 
 data_memory DMem (
     .clk(clk),
@@ -264,9 +272,43 @@ data_memory DMem (
     .mem_write(mem_mem_write),
     .addr(mem_alu_result),
     .write_data(mem_write_data),
-    .read_data(mem_read_data),
-    .thread_id(mem_thread_id)  // 🔥 CRITICAL: Inform memory of the accessing thread
+    .read_data(mem_read_data_dmem),
+    .thread_id(mem_thread_id) 
 );
+
+// Memory-Mapped I/O for Convertible FIFO
+// Address Map:
+// 0x8000_0000 to 0x8000_00FF : Read/Write FIFO Payload
+// 0x8000_1000 : Control Register (Bit 0 sets cpu_mode_en)
+// 0x8000_1004 : Status Register  (Bit 0 reads packet_ready)
+
+// Control Register for cpu_mode_en
+reg cpu_mode_reg;
+always @(posedge clk or negedge sys_rstb) begin
+    if (!sys_rstb)
+        cpu_mode_reg <= 1'b0;
+    else if (mem_mem_write && mem_alu_result == 32'h8000_1000)
+        cpu_mode_reg <= mem_write_data[0];
+end
+
+assign fifo_mode_en  = cpu_mode_reg;
+assign fifo_addr     = mem_alu_result[7:0];
+
+// Write to FIFO only if address is in the 0x80xxxxxx range, but NOT the control register
+assign fifo_wr_en    = mem_mem_write && (mem_alu_result[31:24] == 8'h80) && (mem_alu_result != 32'h8000_1000);
+
+// Pad the 32-bit CPU data to fit the 72-bit FIFO. 
+assign fifo_data_out = {40'd0, mem_write_data}; 
+
+// Read Multiplexer
+wire is_fifo_sram = (mem_alu_result[31:24] == 8'h80) && (mem_alu_result != 32'h8000_1004);
+wire is_fifo_stat = (mem_alu_result == 32'h8000_1004);
+
+// Route the correct read data back to the pipeline based on the address
+wire [31:0] mem_read_data = 
+    is_fifo_stat ? {31'd0, packet_ready} :      // Read Status Register
+    is_fifo_sram ? fifo_data_in[31:0]    :      // Read FIFO Data
+    mem_read_data_dmem;                         // Normal Data Memory Read
 
 // =====================================================
 // MEM / WB Pipeline Register
