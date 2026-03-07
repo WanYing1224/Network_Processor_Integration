@@ -6,6 +6,7 @@ module fifo_control #(
     
     // NetFPGA Interface
     input wire                  net_wr_en,
+	input wire                  net_rd_en,
     input wire [7:0]            net_ctrl_in,
     
     // Processor Interface
