@@ -20,7 +20,14 @@ module pipelinepc(
     output wire [71:0] fifo_data_out,
     output wire        fifo_wr_en,
     input  wire [71:0] fifo_data_in,
-    input  wire        packet_ready
+    input  wire        packet_ready,
+	
+	// Co-Processor Stall and Memory Interface
+	input  wire        stall_from_gpu,    // Signals from gpu_mem_mux
+    output wire        gpu_mem_we,        // ARM Write Enable for 0x81xxxxxx
+    output wire [31:0] gpu_mem_addr,      // ARM Address for 0x81xxxxxx
+    output wire [31:0] gpu_mem_wdata,     // ARM Data for 0x81xxxxxx
+    input  wire [31:0] gpu_mem_rdata      // Data back from 64-bit BRAM
 );
 
 // System reset logic: combines hardware reset with software control
@@ -32,6 +39,7 @@ wire sys_rstb = rstb & (sw_reset == 32'd0);
 wire stall_pipeline;
 wire cu_start_flush; 
 wire actual_branch;
+wire actual_stall = stall_pipeline | stall_from_gpu;
 
 // =====================================================
 // Thread Scheduler
@@ -41,7 +49,7 @@ reg [1:0] thread_id_reg;
 always @(posedge clk or negedge sys_rstb) begin
     if (!sys_rstb)
         thread_id_reg <= 2'b00;
-    else if (!stall_pipeline) // 🌟 CRITICAL: Must freeze rotation during a stall!
+    else if (!actual_stall) // 🌟 CRITICAL: Must freeze rotation during a stall!
         thread_id_reg <= thread_id_reg + 1;   
 end
 
@@ -59,7 +67,7 @@ assign next_pc = current_pc + 9'd4;
 
 pc PC (
     .clk(clk), .rstb(sys_rstb), .wen(1'b1),
-    .stall(stall_pipeline), .thread_id(thread_id),
+    .stall(actual_stall), .thread_id(thread_id),
     .next_pc(next_pc), .ex_branch(actual_branch),
     .ex_thread_id(ex_thread_id), .ex_branch_target(benq_addr),
     .current_pc(current_pc)
@@ -92,7 +100,7 @@ wire [1:0]  id_thread_id;
 
 if_id_reg IF_ID (
     .clk(clk), .rstb(sys_rstb), .en(1'b1),
-    .flush(1'b0), .stall(stall_pipeline),
+    .flush(1'b0), .stall(actual_stall),
     .if_pc(next_pc), .if_instr(inst), .if_thread_id(thread_id),
     .id_pc(id_pc), .id_instr(id_instr), .id_thread_id(id_thread_id)
 );
@@ -121,7 +129,7 @@ control_unit CU (
     .alu_src(id_alu_src), .alu_ctrl(id_alu_ctrl), .imm_src(id_imm_src), 
     .mem_read(id_mem_read), .mem_write(id_mem_write), .reg_write(id_reg_write), 
     .mem_to_reg(id_mem_to_reg), .branch(id_branch), .cond(id_cond),
-    .stall_pipeline(stall_pipeline), .start_flush(cu_start_flush),
+    .stall_pipeline(actual_stall), .start_flush(cu_start_flush),
     .override_wa(cu_override_wa), .use_override_wa(use_override_wa),
     .override_rg2(cu_override_rg2), .use_override_rg2(use_override_rg2),
     .override_imm(cu_override_imm), .use_override_imm(use_override_imm),
@@ -304,10 +312,19 @@ assign fifo_data_out = {40'd0, mem_write_data};
 wire is_fifo_sram = (mem_alu_result[31:24] == 8'h80) && (mem_alu_result != 32'h8000_1004);
 wire is_fifo_stat = (mem_alu_result == 32'h8000_1004);
 
+// Identify when the ARM is accessing the GPU memory range
+wire is_gpu_mem_access = (mem_alu_result[31:24] == 8'h81); 
+
+// Map the ARM Write signals to the top-level ports
+assign gpu_mem_we    = mem_mem_write && is_gpu_mem_access;
+assign gpu_mem_addr  = mem_alu_result;
+assign gpu_mem_wdata = mem_write_data;
+
 // Route the correct read data back to the pipeline based on the address
 wire [31:0] mem_read_data = 
     is_fifo_stat ? {31'd0, packet_ready} :      // Read Status Register
     is_fifo_sram ? fifo_data_in[31:0]    :      // Read FIFO Data
+	is_gpu_mem_access ? gpu_mem_rdata    :		// Routes GPU results to ARM
     mem_read_data_dmem;                         // Normal Data Memory Read
 
 // =====================================================

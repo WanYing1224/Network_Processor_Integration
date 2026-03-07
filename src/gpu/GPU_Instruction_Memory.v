@@ -18,7 +18,7 @@ module GPU_Instruction_Memory #(
             rom[i] = 32'd0;
         end
 		
-		$readmemh("../hex_file/gpu_program.hex", rom);
+		$readmemh("../memory_file/gpu_program.hex", rom);
     end
 
     // Fetch interface (Word-aligned addressing)

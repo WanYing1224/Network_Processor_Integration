@@ -3,7 +3,14 @@
 module gpu_top(
     input wire clk,
     input wire rst,
-    input wire [31:0] host_thread_id // External input acting as our threadIdx.x for simulation
+    input wire [31:0] host_thread_id, 
+	
+	input  wire [63:0] gpu_mem_rdata,
+	
+	output wire        gpu_mem_we,
+    output wire [31:0] gpu_mem_addr,
+    output wire [63:0] gpu_mem_wdata,
+	output wire gpu_done
 );
 
     // ==========================================
@@ -190,7 +197,14 @@ module gpu_top(
     // ==========================================
     // MEM Stage
     // ==========================================
-    wire [63:0] mem_read_data;
+ 
+	// Route GPU write signals OUT to the multiplexer
+    assign gpu_mem_we    = mem_we_mem;
+    assign gpu_mem_addr  = mem_alu_result[31:0];
+    assign gpu_mem_wdata = mem_rs2_data;
+    
+    // Route read signals IN from the multiplexer
+    wire [63:0] mem_read_data = gpu_mem_rdata;
 
     GPU_Data_Memory dmem_inst(
         .clk(clk),
@@ -219,5 +233,7 @@ module gpu_top(
     // WB Stage
     // ==========================================
     assign wb_data = (wb_opcode == `OP_LD64) ? wb_mem_read_data : wb_alu_result;
+	
+	assign gpu_done = tensor_done;
 
 endmodule

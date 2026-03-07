@@ -2,7 +2,7 @@ module GPU_Data_Memory #(
     parameter MEM_DEPTH = 1024
 )(
     input wire clk,
-    input wire we,
+    input wire [7:0]  we,
     input wire [31:0] addr,       // Calculated Base + Offset
     input wire [63:0] write_data, // From Rs_src (ST64)
 	
@@ -12,18 +12,18 @@ module GPU_Data_Memory #(
     reg [63:0] ram [0:MEM_DEPTH-1];
 	
 	initial begin
-        $readmemh("../hex_file/data_memory.hex", ram);
+        $readmemh("../memory_file/data_memory.hex", ram);
     end
 
     assign read_data = ram[addr[11:3]];
 	
-	always @(posedge clk) 
-	begin
-        if(we) 
-		begin
-            ram[addr[11:3]] <= write_data; // 64-bit aligned addressing
+	integer i;
+    always @(posedge clk) begin
+        for (i = 0; i < 8; i = i + 1) begin
+            if (we) begin
+                ram[addr[11:3]][(i*8) +: 8] <= write_data[(i*8) +: 8];
+            end
         end
-		
     end
 	
 endmodule
