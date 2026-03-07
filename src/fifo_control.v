@@ -53,6 +53,17 @@ module fifo_control #(
                         packet_is_buffering <= 1'b0;
                     end
                 end
+				
+				// Drain logic: Increment head when NetFPGA requests data
+                if (net_rd_en && (head_addr != tail_addr)) begin
+                    head_addr <= head_addr + 1'b1;
+                end
+                
+                // Reset full flag once the buffer is successfully drained
+                if (!packet_ready && fifo_full && (head_addr == tail_addr)) begin
+                    fifo_full <= 1'b0;
+                end
+				
             end
             
             // MODE 1: Processor Intervention Mode
