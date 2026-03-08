@@ -1,0 +1,693 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/USC CE/EE457/Modelsim_Projects
+T_opt
+!s110 1772934302
+V1S:;oJk8dA0^c>73HJcSd1
+04 21 4 work system_integration_tb fast 0
+=1-20c19bca69c1-69acd49e-2c3-4764
+o-quiet -auto_acc_if_foreign -work work
+Z1 tCvgOpt 0
+n@_opt
+OL;O;10.6e;65
+R0
+valu
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 bmZk[dPUhT]i806PCm<l72
+IUXHYA4]Wb033UP5EnI`=L3
+Z3 dC:/USC CE/EE533/Lab8/Network_Processor_Integration/sim
+Z4 w1772947895
+Z5 8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v
+Z6 FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v
+L0 487
+Z7 OL;L;10.6e;65
+Z8 !s108 1772947994.000000
+Z9 !s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v|
+Z10 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v|
+!i113 0
+Z11 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
+R1
+vbarrel_shifter
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 Ij@ELGDj<naTDR6iaEb_F3
+I78<9[_FNn7WE4D=hUT8i80
+R3
+R4
+R5
+R6
+L0 750
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vbf16_mac
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 m2V;XCmjceXS6g^@iz92Y2
+I;nAR6Z=5WkmD_n][zDDQG0
+R3
+w1772354798
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v|
+!i113 0
+R11
+R1
+vcondition_check
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 R4a`9<GofI3WkWGFW::fO3
+IRcOT>>SEV=0G?mo?9KM9b1
+R3
+R4
+R5
+R6
+L0 528
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vcontrol_unit
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 bb]=LJK:e>AWYc2`bCkD33
+I]bMVWC[hIQiTGFYnk2WP^2
+R3
+R4
+R5
+R6
+L0 143
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vconvertible_fifo
+Z12 !s110 1772947993
+!i10b 1
+!s100 _aH1Tf5@1lZPi7AZ<mS1]3
+I5b=foY1Ezin9N2bVI6cba0
+R2
+R3
+w1772831175
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v
+L0 1
+R7
+r1
+!s85 0
+31
+Z13 !s108 1772947993.000000
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v|
+!i113 0
+R11
+R1
+vcpsr_array
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 m><fb<5B5zcMA@kA2OdH]2
+I93R;ZTSCzoPf`EF;>1KIE1
+R3
+R4
+R5
+R6
+L0 563
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vdata_memory
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 Wg9QUQflIU_Aj5of2]<P03
+IO;nBo1DlZoN`iHKb2F<eo2
+R3
+R4
+R5
+R6
+L0 605
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vdual_port_bram
+R12
+!i10b 1
+!s100 `AQeSE=4`dI?@C8zQUiK]0
+I8Zj@<[bH9F8MX<Fd_CS`40
+R2
+R3
+w1772831050
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v
+L0 1
+R7
+r1
+!s85 0
+31
+R13
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v|
+!i113 0
+R11
+R1
+vex_mem_reg
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 iFSed5J?`M6z58P5S9R:G1
+I>=CzcQGUGJN7Ae3LO5omh3
+R3
+R4
+R5
+R6
+L0 666
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vfifo_control
+!s110 1772947994
+!i10b 1
+!s100 h_EEJOBe5a]919jVh1]jQ0
+I5C:45<XCiC9B0z7]8X3cN2
+R2
+R3
+w1772875932
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v
+L0 1
+R7
+r1
+!s85 0
+31
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v|
+!i113 0
+R11
+R1
+vfifo_integration_tb
+R12
+!i10b 1
+!s100 9JB3?61FJ[OT1LFJkmAnj3
+I6oY_dkgD<DKNXjkijc:Y31
+R2
+R3
+w1772874413
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/fifo_integration_tb.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/fifo_integration_tb.v
+L0 3
+R7
+r1
+!s85 0
+31
+R13
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/fifo_integration_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/fifo_integration_tb.v|
+!i113 0
+R11
+R1
+vGPU_Control_Unit
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 9]:kMFniN=HG5gXH[O@Xh3
+Ib]b2IH24;MR;:=TIVo^NK3
+R3
+w1772946242
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v|
+!i113 0
+R11
+R1
+n@g@p@u_@control_@unit
+vGPU_Data_Memory
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 k0QKTNCSFTn<4E<7XFCY31
+I`IfWj`W^eE8I51GfKYFYK3
+R3
+w1772926630
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v|
+!i113 0
+R11
+R1
+n@g@p@u_@data_@memory
+vGPU_Execution_Unit
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 dWEQASkbF>QkTNBglYY:C3
+I>LQ6INnJY[KCd722lT`OT3
+R3
+w1772883441
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v|
+!i113 0
+R11
+R1
+n@g@p@u_@execution_@unit
+vGPU_Instruction_Memory
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 04cdY4>LYdfEf>Wk<>Df60
+I;Fjlnh6[ABnNAPUNFHc8k2
+R3
+w1772888791
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v|
+!i113 0
+R11
+R1
+n@g@p@u_@instruction_@memory
+vgpu_mem_mux
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 Y:J;K>?ZU=1Qng2kb=UfW2
+I@UFM]VIRWa=FobKTE@;jA0
+R3
+w1772928718
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v|
+!i113 0
+R11
+R1
+vGPU_Pipeline_Reg
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 @:fXzS0MZL4jbRIZCQ9R^1
+Iaco=VJTjeBj>3BmoU5O9e0
+R3
+w1772883452
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v|
+!i113 0
+R11
+R1
+n@g@p@u_@pipeline_@reg
+vGPU_Program_Counter
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 O<?=J`FVCh23Y0EiBY?BR3
+I@I<_e^Ze]aDLn>md3S9980
+R3
+w1772883459
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v|
+!i113 0
+R11
+R1
+n@g@p@u_@program_@counter
+vGPU_Register_File
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 T>[CPd0fWCXR_b6A<zoU71
+IHbh^e<zYQKj:5MC[CRLC=0
+R3
+w1772883464
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v|
+!i113 0
+R11
+R1
+n@g@p@u_@register_@file
+vgpu_tensor_core_tb
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 :=lidnAN3ZabXIaij@zkj0
+I[KbU36k?]A;6f7X24TgzH0
+R3
+w1772947951
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v
+L0 3
+R7
+Z14 !s108 1772947995.000000
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v|
+!i113 0
+R11
+R1
+vgpu_top
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 al9DQ_2246c1hnGfzNn4m1
+IaQXnbMlMb47g3OT_E0m5E0
+R3
+w1772946027
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v
+L0 3
+R7
+R8
+!s107 C:\USC CE\EE533\Lab8\Network_Processor_Integration\src\gpu\isa_defines.vh|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v|
+!i113 0
+R11
+R1
+vid_ex_reg
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 =bT4mVzV74LKV3A0EJEB32
+I?lKO3kPXKfM[RWYUboCF:3
+R3
+R4
+R5
+R6
+L0 389
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vif_id_reg
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 k?KglGlQ60DREV9heg]k43
+IVVH8R^c_UmL]k^_G5bJcG3
+R3
+R4
+R5
+R6
+L0 104
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vimem_bram
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 jJaAe0aJOY6I^<OoKGPD53
+IAXZm:@XHPS:lQX`NW=dW=0
+R3
+R4
+R5
+R6
+L0 62
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vimm_gen
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 >PhAEm4k9fRf2zTog48UC2
+IzJ_FEJU39dTS[kA6V>NUm3
+R3
+R4
+R5
+R6
+L0 357
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vmem_wb_reg
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 Wm1kejH?JH65[7h8jF<S_2
+IER[70aEoG[LcoY?T1O`7B2
+R3
+R4
+R5
+R6
+L0 712
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vpc
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 :lY_7[E;o<J<ODkL_oP=G2
+IhFcL?z2WYWVi8Q5[K1A:P3
+R3
+R4
+R5
+R6
+L0 6
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vpipelinepc
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 BV81@Z^JlbJ?cK_KB8]d]0
+IiZ0Hdn:c[<`7g3?iJ0YSA0
+R3
+w1772936291
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v
+L0 2
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v|
+!i113 0
+R11
+R1
+vregister_file
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 JA^2nn]3ZG4C5O9DNEfib1
+I:NQ=ECL90lb4b4ITaW3Jz0
+R3
+R4
+R5
+R6
+L0 315
+R7
+R8
+R9
+R10
+!i113 0
+R11
+R1
+vsystem_integration_tb
+!s110 1772947995
+!i10b 1
+!s100 P2]5O_W><PR6z[NPai51j2
+I;XmRA84KlR8Mo`>;]53Cn2
+R2
+R3
+w1772946821
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v
+L0 3
+R7
+r1
+!s85 0
+31
+R14
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v|
+!i113 0
+R11
+R1
+vTensor_Unit
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 K@jBgmH6?^_VI49mJ^MFM0
+ID9R9g`1d^CZ0SZnnC<Y5^3
+R3
+w1772354779
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v
+L0 1
+R7
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v|
+!i113 0
+R11
+R1
+n@tensor_@unit
+vuser_datapath
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 @Mj3=zZ;OGfld:O6G0]5G3
+I2^dSfJNQO]X[7QFDnDF2T3
+R3
+w1772937615
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v
+L0 1
+R7
+R14
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v|
+!i113 0
+R11
+R1
