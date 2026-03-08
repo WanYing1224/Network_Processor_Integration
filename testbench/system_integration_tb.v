@@ -45,24 +45,23 @@ module system_integration_tb;
         // Simulate Network Packet Arrival using FORCE
         #50;
         $display("[%0t] Injecting Network Packet (Payload: 0x4000400040004000)...", $time);
-        force dut.ARM_Core.fifo_data_in = 72'h00_4000400040004000;
-		
-		// Pass the Status Check
-		force dut.ARM_Core.packet_ready = 1'b1;
-        wait(dut.Arbiter.master_addr == 32'h80001004); // Wait for T0
-        @(posedge clk); 
-        #1; 
-        force dut.ARM_Core.packet_ready = 1'b0; // Drop immediately to trap T1, T2, T3
-		
-		// Deliver the Payload
-		wait(dut.Arbiter.master_addr == 32'h80000000); // Wait for T0 to ask for data
-        force dut.ARM_Core.packet_ready = 1'b1; // Turn FIFO output back on!
-        @(posedge clk); 
-        #1; 
-        force dut.ARM_Core.packet_ready = 1'b0; // Drop it permanently
         
-        $display("[%0t] Thread 0 safely intercepted the packet and data!", $time);
-
+        force dut.ARM_Core.fifo_data_in = 72'h00_4000400040004000;
+        
+        // 🌟 THE PRECISION STRIKE: Wait specifically for Thread 0's turn!
+        wait(dut.Arbiter.master_addr == 32'h80001004 && dut.ARM_Core.mem_thread_id == 2'b00);
+        
+        // Force the flag high exactly when Thread 0 is listening
+        force dut.ARM_Core.packet_ready = 1'b1; 
+        
+        @(posedge clk); 
+        #1; 
+        
+        // Drop it immediately so Threads 1, 2, and 3 are blinded and stay trapped
+        force dut.ARM_Core.packet_ready = 1'b0; 
+        
+        $display("[%0t] Thread 0 intercepted the packet. Hidden from other threads.", $time);
+		
         // Monitor GPU Trigger
         wait(dut.Arbiter.gpu_run == 1'b1);
         $display("[%0t] ARM triggered GPU! stall_arm_pipeline should be HIGH.", $time);
@@ -77,7 +76,7 @@ module system_integration_tb;
         $display("[%0t] ARM Data Out (AI Result): 0x%h", $time, dut.ARM_Core.fifo_data_out);
 
         // Check if the payload matches our BFloat16 3.5 calculation
-        if (dut.ARM_Core.fifo_data_out[31:0] == 32'h40C040C0) begin
+        if (dut.ARM_Core.fifo_data_out[31:0] == 32'h40604060) begin
             $display("[%0t] SUCCESS: Network payload successfully modified with AI math!", $time);
         end else begin
             $display("[%0t] ERROR: Unexpected payload data.", $time);
