@@ -58,7 +58,10 @@ module gpu_top(
     wire stall_decode;
     wire id_we_reg, id_we_mem, id_tensor_start;
     wire [3:0]  id_rs1_addr = id_instr[21:18];
-    wire [3:0]  id_rs2_addr = id_instr[17:14];
+    // wire [3:0]  id_rs2_addr = id_instr[17:14];
+	
+	// Multiplex the Rs2 address to read Rd for Store instructions
+	wire [3:0]  id_rs2_addr = (id_instr[31:26] == 6'b000100) ? id_instr[25:22] : id_instr[17:14];	
     wire [3:0]  id_rd_addr  = id_instr[25:22];
     wire [17:0] id_imm      = id_instr[17:0]; // I-Type immediate
 	
@@ -78,7 +81,7 @@ module gpu_top(
         .clk(clk),
         .we(wb_we_reg),
         .rs1_addr(id_instr[21:18]),
-        .rs2_addr(id_instr[17:14]),
+        .rs2_addr(id_rs2_addr), 	// (id_instr[17:14]),
         .rs3_addr(id_instr[13:10]), 
         .rd_addr(wb_rd_addr),
         .write_data(wb_data),
@@ -235,6 +238,9 @@ module gpu_top(
     // ==========================================
     assign wb_data = (wb_opcode == `OP_LD64) ? wb_mem_read_data : wb_alu_result;
 	
-	assign gpu_done = tensor_done;
+	// assign gpu_done = tensor_done;
+	
+	// Only signal done when the Store instruction (000100) is completely finished!
+	assign gpu_done = (wb_opcode == 6'b000100);
 
 endmodule

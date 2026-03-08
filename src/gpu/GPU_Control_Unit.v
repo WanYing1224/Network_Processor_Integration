@@ -18,7 +18,11 @@ module GPU_Control_Unit(
 
     wire [5:0] opcode = instr_id[31:26];
     wire [3:0] rs1 = instr_id[21:18];
-    wire [3:0] rs2 = instr_id[17:14];
+	
+    // wire [3:0] rs2 = instr_id[17:14];
+	// Tell the hazard detector to check the Rd field for ST64!
+	wire [3:0] rs2 = (opcode == 6'b000100) ? instr_id[25:22] : instr_id[17:14];
+	
 	wire [3:0] rs3 = instr_id[13:10];
 
     // Scoreboard / RAW Hazard Detection
