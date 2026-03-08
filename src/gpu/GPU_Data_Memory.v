@@ -2,7 +2,7 @@ module GPU_Data_Memory #(
     parameter MEM_DEPTH = 1024
 )(
     input wire clk,
-    input wire [7:0]  we,
+    input wire [7:0]  be,		  // 8-bit Byte Enable
     input wire [31:0] addr,       // Calculated Base + Offset
     input wire [63:0] write_data, // From Rs_src (ST64)
 	
@@ -20,7 +20,7 @@ module GPU_Data_Memory #(
 	integer i;
     always @(posedge clk) begin
         for (i = 0; i < 8; i = i + 1) begin
-            if (we) begin
+            if (be[i]) begin
                 ram[addr[11:3]][(i*8) +: 8] <= write_data[(i*8) +: 8];
             end
         end

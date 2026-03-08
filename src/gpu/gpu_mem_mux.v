@@ -5,8 +5,7 @@ module gpu_mem_mux(
     // ==========================================
     // Master Output (Connects to gpu_data_memory.v)
     // ==========================================
-    output wire        master_we,
-	output wire [63:0] master_be,        // 64-bit Byte Enables
+	output wire [7:0] master_be,         // 8-bit Byte Enables
     output wire [31:0] master_addr,      // Memory Address
     output wire [63:0] master_wdata,     // Write Data
     input  wire [63:0] master_rdata,     // Read Data
@@ -35,20 +34,10 @@ module gpu_mem_mux(
     input  wire        gpu_done             // Gpu_top asserts when finished
 );
 
-    // -----------------------------------------------------------------
-    // 1. Host Memory-Mapped I/O Decoding (Address Range: 0x81xxxxxx)
-    // -----------------------------------------------------------------
     wire is_host_access = (arm_addr[31:24] == 8'h81);
-    
-    // Define a control register at 0x8100_1000 for triggering the co-processor
     wire is_gpu_control_reg = is_host_access && (arm_addr == 32'h8100_1000);
-    
-    // The main 64-bit data memory array starts at 0x8100_0000
     wire is_gpu_sram_access = is_host_access && !is_gpu_control_reg;
-
-    // -----------------------------------------------------------------
-    // 2. State Machine: Host Arbitration and Stalling
-    // -----------------------------------------------------------------
+	
     reg precedence; // 1 = Host Master, 0 = GPU Master
 
     // Arbitration Logic: Seize memory control and hold CPU
@@ -56,6 +45,7 @@ module gpu_mem_mux(
         if (rst) begin
             stall_arm_pipeline <= 1'b0;
             gpu_run            <= 1'b0;
+			precedence         <= 1'b1;
         end else begin
             // Clear pulses
             gpu_run <= 1'b0;
@@ -80,34 +70,21 @@ module gpu_mem_mux(
         end
     end
 
-    // -----------------------------------------------------------------
-    // 3. 64-bit Master Signal Multiplexing
-    // -----------------------------------------------------------------
-    // Mux selects active master based on state (1 = Host, 0 = GPU)
-    assign master_we    = precedence ? (is_gpu_sram_access && arm_we) : gpu_we;
+    // Address Multiplexing
     assign master_addr  = precedence ? arm_addr : gpu_addr;
-    assign master_wdata = precedence ? {32'h0, arm_wdata} : gpu_wdata; // Zero-pad ARM writes
+	
+	//Data Write Multiplexing
+    assign master_wdata = precedence ? {arm_wdata, arm_wdata} : gpu_wdata;
 
-    // -----------------------------------------------------------------
-    // 4. Data Translation: 32-bit Host reads 64-bit Master RDATA
-    // -----------------------------------------------------------------
-    // We must handle the mismatch. ARM reads either the lower 32-bits or the 
-    // upper 32-bits of the 64-bit word depending on the address LSB.
-    // Address Even = [31:0], Address Odd = [63:32]
-    assign arm_rdata = arm_addr[0] ? master_rdata[63:32] : master_rdata[31:0];
+	// Byte Enable Logic
+    wire [7:0] arm_formatted_be = arm_addr[2] ? 8'hF0 : 8'h0F;
+	assign master_be = precedence ? ((is_gpu_sram_access && arm_we) ? arm_formatted_be : 8'h00) : (gpu_we ? 8'hFF : 8'h00);
 
     // Connect raw 64-bit path back to the pure GPU core
     assign gpu_rdata = master_rdata;
 
-    // -----------------------------------------------------------------
-    // 5. Byte-Enable Translation (Critical for ARM writes)
-    // -----------------------------------------------------------------
-    // The ARM writes 32 bits into a 64-bit bus. We must use Byte Enables (BE)
-    // so we don't clobber the other half of the 64-bit BFloat16/SIMD word.
-    // Assuming Data_Memory.v supports standard byte masking...
-    wire [63:0] arm_formatted_be = arm_addr[0] ? 64'hF0F0_F0F0_0000_0000 : 64'h0000_0000_F0F0_F0F0;
-    wire [63:0] gpu_full_be      = {64{1'b1}}; // GPU writes all 64 bits.
-
-    assign master_be = precedence ? arm_formatted_be : gpu_full_be;
+    // Data Read Translation 
+    assign arm_rdata = arm_addr[2] ? master_rdata[63:32] : master_rdata[31:0];
+    assign gpu_rdata = master_rdata;
 
 endmodule

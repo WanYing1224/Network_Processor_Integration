@@ -29,7 +29,7 @@ module user_datapath #(
     wire [63:0] mux_to_gpu_rdata;
 
     // MUX <-> Shared BRAM Interconnect
-    wire [7:0]  mux_to_bram_we;
+    wire [7:0]  mux_to_bram_be;
     wire [31:0] mux_to_bram_addr;
     wire [63:0] mux_to_bram_wdata;
     wire [63:0] bram_to_mux_rdata;
@@ -43,21 +43,47 @@ module user_datapath #(
     pipelinepc ARM_Core (
         .clk(clk),
         .rstb(rstb),
-        .stall_from_gpu(stall_arm), // NEW: Freezes ARM while GPU runs
+		
+		// Co-Processor Control
+        .stall_from_gpu(stall_arm),
+		
+		// Explicitly tie off all unused software inputs to 0
+		.sw_reset(32'd0),        
+        .sw_mem_addr(32'd0),     
+        .sw_mem_wdata(32'd0),    
+        .sw_mem_cmd(32'd0),      
         
         // Memory-Mapped Ports to GPU Arbiter
         .gpu_mem_we(arm_mem_we),
         .gpu_mem_addr(arm_mem_addr),
         .gpu_mem_wdata(arm_mem_wdata),
-        .gpu_mem_rdata(mux_to_arm_rdata)
+        .gpu_mem_rdata(mux_to_arm_rdata),
         
-        // ... (other existing ports like hw_instr, etc.)
+        // Tie off unused FIFO inputs to prevent 'X' propagation
+        .fifo_data_in(72'd0),
+        .packet_ready(1'b0),
+        
+        // Leave unused outputs unconnected (they safely float)
+        .hw_mem_rdata(),
+        .hw_pc(),
+        .hw_instr(),
+        .fifo_mode_en(),
+        .fifo_addr(),
+        .fifo_data_out(),
+        .fifo_wr_en()
     );
+	
+	reg gpu_start_d;
+    always @(posedge clk) begin
+        if (~rstb) gpu_start_d <= 1'b0;
+        else       gpu_start_d <= gpu_start; 
+    end
+    wire gpu_start_pulse = gpu_start & ~gpu_start_d;
 
     // Block: GPU (Simple CPU + Tensor Core)
     gpu_top GPU_Core (
         .clk(clk),
-        .rst(rstb | gpu_start), // Pulse starts the GPU execution
+        .rst(~rstb | gpu_start_pulse),
         .host_thread_id(32'd0),
         
         // Memory Interface
@@ -87,7 +113,7 @@ module user_datapath #(
         .gpu_rdata(mux_to_gpu_rdata),
         
         // BRAM Master Port
-        .master_we(mux_to_bram_we),
+        .master_be(mux_to_bram_be),
         .master_addr(mux_to_bram_addr),
         .master_wdata(mux_to_bram_wdata),
         .master_rdata(bram_to_mux_rdata),
@@ -100,7 +126,7 @@ module user_datapath #(
     // Block: Shared BRAM
     GPU_Data_Memory Shared_Memory (
         .clk(clk),
-        .we(mux_to_bram_we),
+        .be(mux_to_bram_be),
         .addr(mux_to_bram_addr),
         .write_data(mux_to_bram_wdata),
         .read_data(bram_to_mux_rdata)

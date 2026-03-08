@@ -206,6 +206,7 @@ module gpu_top(
     // Route read signals IN from the multiplexer
     wire [63:0] mem_read_data = gpu_mem_rdata;
 
+/*
     GPU_Data_Memory dmem_inst(
         .clk(clk),
         .we(mem_we_mem),
@@ -213,7 +214,7 @@ module gpu_top(
         .write_data(mem_rs2_data),
         .read_data(mem_read_data)
     );
-
+*/
     // ==========================================
     // MEM/WB Pipeline Register
     // ==========================================

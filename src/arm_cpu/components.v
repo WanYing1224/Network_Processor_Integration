@@ -72,7 +72,7 @@ module imem_bram (clk, addr, thread_id, wen, din, inst, rstb);
     integer i; 
     initial begin
         // Initialize and load instructions for Thread 0
-        $readmemh("../memory_file/inst_1.mem", ram_array, 0, 127); 
+        $readmemh("../memory_file/inst_final.mem", ram_array, 0, 127); 
         
         // Critical: Copy code segment to the other 3 threads
         for (i = 0; i < 128; i = i + 1) begin
@@ -628,14 +628,14 @@ module data_memory (
 
         // 2. Load initial data from hex file (using relative path)
         $readmemh("../memory_file/data_init.hex", dmem, 0, 1023);
-
+/*
         // 3. Debug: Display first few entries after loading
-        #1;
+        #1;		
         $display("==== After data_init.hex load ====");
         for (i = 0; i < 10; i = i + 1) begin
             $display("dmem[%0d] = %h", i, dmem[i]);
         end
-
+*/
         // 4. Duplicate the initial data segment for the other threads
         for (i = 0; i < 1024; i = i + 1) begin
             dmem[1024 + i] = dmem[i];

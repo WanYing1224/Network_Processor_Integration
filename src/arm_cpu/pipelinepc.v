@@ -129,7 +129,7 @@ control_unit CU (
     .alu_src(id_alu_src), .alu_ctrl(id_alu_ctrl), .imm_src(id_imm_src), 
     .mem_read(id_mem_read), .mem_write(id_mem_write), .reg_write(id_reg_write), 
     .mem_to_reg(id_mem_to_reg), .branch(id_branch), .cond(id_cond),
-    .stall_pipeline(actual_stall), .start_flush(cu_start_flush),
+    .stall_pipeline(stall_pipeline), .start_flush(cu_start_flush),
     .override_wa(cu_override_wa), .use_override_wa(use_override_wa),
     .override_rg2(cu_override_rg2), .use_override_rg2(use_override_rg2),
     .override_imm(cu_override_imm), .use_override_imm(use_override_imm),
@@ -194,7 +194,7 @@ wire [31:0] ex_imm_out;
 wire [3:0]  ex_wa;
 
 id_ex_reg ID_EX (
-    .clk(clk), .rstb(sys_rstb), .en(1'b1),
+    .clk(clk), .rstb(sys_rstb), .en(~actual_stall),
     .flush(cu_start_flush), 
     .id_alu_src(id_alu_src), .id_alu_ctrl(id_alu_ctrl), .id_mem_read(id_mem_read),
     .id_mem_write(id_mem_write), .id_reg_write(id_reg_write), .id_mem_to_reg(id_mem_to_reg),
