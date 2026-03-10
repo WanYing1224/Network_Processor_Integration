@@ -10,7 +10,12 @@ module gpu_top(
 	output wire        gpu_mem_we,
     output wire [31:0] gpu_mem_addr,
     output wire [63:0] gpu_mem_wdata,
-	output wire gpu_done
+	output wire gpu_done,
+	
+	// Host PC Programming Ports
+	input  wire        host_wen,
+    input  wire [31:0] host_addr,
+    input  wire [31:0] host_wdata
 );
 
     // ==========================================
@@ -30,9 +35,16 @@ module gpu_top(
         .pc(if_pc)
     );
 
-    GPU_Instruction_Memory imem_inst(
+    GPU_Instruction_Memory #(
+        .MEM_DEPTH(1024)
+    ) pc_inst_mem (
+        .clk(clk),
         .pc(if_pc),
-        .instr(if_instr)
+        .instr(if_instr),
+        // Host PC Ports
+        .host_wen(host_wen),
+        .host_addr(host_addr),
+        .host_wdata(host_wdata)
     );
 
     // ==========================================

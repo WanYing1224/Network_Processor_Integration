@@ -59,42 +59,34 @@ endmodule
 // ==========================================
 // 2. Instruction Memory (IMEM)
 // ==========================================
-module imem_bram (clk, addr, thread_id, wen, din, inst, rstb);
-    input  wire        clk;
-    input  wire [10:0] addr;
-    input  wire        rstb;
-    input  wire        wen;       
-    input  wire [31:0] din;       
-    output reg  [31:0] inst;
-    input  wire [1:0]  thread_id;
-    reg [31:0] ram_array [0:511];
-
-    integer i; 
+module imem_bram (
+    input  wire        clk,
+    input  wire        rstb,
+    input  wire [1:0]  thread_id,
+    input  wire [10:0] addr,
+    output reg  [31:0] inst,
+    
+    // Host PC Programming Ports
+    input  wire        wen,
+    input  wire [31:0] din
+);
+    (* ram_style = "block" *) reg [31:0] imem [0:1023];
+	
+	integer i;
     initial begin
-        // Initialize and load instructions for Thread 0
-        $readmemh("../memory_file/inst_final.mem", ram_array, 0, 127); 
-        
-        // Critical: Copy code segment to the other 3 threads
-        for (i = 0; i < 128; i = i + 1) begin
-            ram_array[i + 128] = ram_array[i]; // Thread 1
-            ram_array[i + 256] = ram_array[i]; // Thread 2
-            ram_array[i + 384] = ram_array[i]; // Thread 3
+        for(i = 0; i < 1024; i = i + 1) begin
+            imem[i] = 32'd0;
         end
     end
 
-    // Map thread-specific address to the physical RAM array
-    wire [8:0] real_addr = (!rstb) ? addr[10:2] : {thread_id, addr[8:2]};
-    
-    // Correction 1: Keep write operations synchronous (Clock Edge)
     always @(posedge clk) begin
         if (wen) begin
-            ram_array[real_addr] <= din;
+            imem[addr] <= din; // Host PC writes directly to the address
         end
     end
 
-    // Critical Correction 2: Change read logic to combinational for pipeline timing!
     always @(*) begin
-        inst = ram_array[real_addr];
+        inst = imem[addr];     // CPU reads instruction
     end
 endmodule
 
@@ -604,60 +596,46 @@ endmodule
 // ==========================================
 module data_memory (
     input  wire        clk,
+    input  wire        rstb,         // Added reset signal
     input  wire        mem_read,
     input  wire        mem_write,
     input  wire [31:0] addr,       
     input  wire [31:0] write_data, 
     output reg  [31:0] read_data,
-    input  wire [1:0]  thread_id
+    input  wire [1:0]  thread_id,
+    
+    // Host PC Programming Ports
+    input  wire        host_wen,
+    input  wire [31:0] host_addr,
+    input  wire [31:0] host_wdata
 );
-
-    // 4096 words total (4 threads x 1024 words each)
     reg [31:0] dmem [0:4095];
-
-    // Convert byte address to partitioned word address
-    wire [11:0] word_addr = {thread_id, addr[11:2]};
-
-    integer i;
-
+	
+	integer i;
     initial begin
-        // 1. Clear all memory
-        for (i = 0; i < 4096; i = i + 1) begin
-            dmem[i] = 32'b0;
-        end
-
-        // 2. Load initial data from hex file (using relative path)
-        $readmemh("../memory_file/data_init.hex", dmem, 0, 1023);
-/*
-        // 3. Debug: Display first few entries after loading
-        #1;		
-        $display("==== After data_init.hex load ====");
-        for (i = 0; i < 10; i = i + 1) begin
-            $display("dmem[%0d] = %h", i, dmem[i]);
-        end
-*/
-        // 4. Duplicate the initial data segment for the other threads
-        for (i = 0; i < 1024; i = i + 1) begin
-            dmem[1024 + i] = dmem[i];
-            dmem[2048 + i] = dmem[i];
-            dmem[3072 + i] = dmem[i];
+        for(i = 0; i < 4096; i = i + 1) begin
+            dmem[i] = 32'd0;
         end
     end
+    
+    // THE HARDWARE FIREWALL
+	wire is_host_route = host_wen && (host_addr[31:28] == 4'h1);
+	
+    wire [11:0] actual_addr  = (is_host_route) ? host_addr[11:0] : {thread_id, addr[11:2]};
+    wire        actual_wen   = (is_host_route) ? 1'b1 : mem_write;
+    wire [31:0] actual_wdata = (is_host_route) ? host_wdata : write_data;
 
     // Synchronous write
     always @(posedge clk) begin
-        if (mem_write) begin
-            $display("WRITE T%0d addr=%h word_addr=%h data=%h",
-                     thread_id, addr, word_addr, write_data);
-            dmem[word_addr] <= write_data;
+        if (actual_wen) begin
+            dmem[actual_addr] <= actual_wdata;
         end
     end
 
-    // Combinational read (avoids reset-traps or timing delays)
+    // Combinational read
     always @(*) begin
-        read_data = dmem[word_addr];
+        read_data = dmem[actual_addr];
     end
-
 endmodule
 
 // ==========================================

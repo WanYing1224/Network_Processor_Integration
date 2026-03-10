@@ -41,6 +41,11 @@ wire cu_start_flush;
 wire actual_branch;
 wire actual_stall = stall_pipeline | stall_from_gpu;
 
+// --- Host PC Bootloader Routing Logic ---
+wire host_write_req   = (!sys_rstb) && (sw_mem_cmd == 32'd1);
+wire host_to_arm_imem = host_write_req && (sw_mem_addr[31:28] == 4'h0);
+wire host_to_arm_dmem = host_write_req && (sw_mem_addr[31:28] == 4'h1);
+
 // =====================================================
 // Thread Scheduler
 // =====================================================
@@ -85,9 +90,16 @@ wire        actual_imem_wen  = (!sys_rstb) ? (sw_mem_cmd == 32'd1) : 1'b0;
 wire [31:0] actual_imem_wdata = (!sys_rstb) ? sw_mem_wdata : 32'd0;
 
 imem_bram IMEM (
-    .clk(clk), .rstb(sys_rstb), .addr(actual_imem_addr),
-    .wen(actual_imem_wen), .thread_id(thread_id), .din(actual_imem_wdata), .inst(inst)
+    .clk(clk),
+    .rstb(sys_rstb),
+    .thread_id(thread_id),
+    .addr(host_to_arm_imem ? sw_mem_addr[10:0] : {2'b00, current_pc}),
+    .inst(inst),
+    // Host PC Ports
+    .wen(host_to_arm_imem),
+    .din(sw_mem_wdata)
 );
+	
 assign hw_instr = inst;
 assign hw_mem_rdata = inst;
 
@@ -276,12 +288,17 @@ wire [31:0] mem_read_data_dmem;
 
 data_memory DMem (
     .clk(clk),
+    .rstb(sys_rstb),           
     .mem_read(mem_mem_read),
     .mem_write(mem_mem_write),
     .addr(mem_alu_result),
     .write_data(mem_write_data),
     .read_data(mem_read_data_dmem),
-    .thread_id(mem_thread_id) 
+    .thread_id(mem_thread_id),
+    // Host PC Ports
+    .host_wen(host_to_arm_dmem),
+    .host_addr(sw_mem_addr),
+    .host_wdata(sw_mem_wdata)
 );
 
 // Memory-Mapped I/O for Convertible FIFO

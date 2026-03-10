@@ -1,27 +1,31 @@
 module GPU_Instruction_Memory #(
-    parameter MEM_DEPTH = 1024 // 4KB of Instruction Memory
+    parameter MEM_DEPTH = 1024 
 )(
+    input  wire        clk,
     input  wire [31:0] pc,
-    output wire [31:0] instr
+    output wire [31:0] instr,
+    
+    // Host PC Programming Ports
+    input  wire        host_wen,
+    input  wire [31:0] host_addr,
+    input  wire [31:0] host_wdata
 );
-
-    // Inferred BRAM
-    reg [31:0] rom [0:MEM_DEPTH-1];
+    
+	(* ram_style = "block" *) reg [31:0] ram [0:MEM_DEPTH-1];
 	
 	integer i;
-
-    // Initialize from the Python compiler's output
-    initial 
-	begin
-        for(i = 0; i < MEM_DEPTH; i = i + 1)
-		begin
-            rom[i] = 32'd0;
+    initial begin
+        for(i = 0; i < MEM_DEPTH; i = i + 1) begin
+            ram[i] = 32'd0; // Fills memory with 0s instead of Xs
         end
-		
-		$readmemh("../memory_file/gpu_program.hex", rom);
     end
 
-    // Fetch interface (Word-aligned addressing)
-    assign instr = rom[pc[11:2]]; 
+    always @(posedge clk) begin
+        if (host_wen) begin
+            ram[host_addr[11:2]] <= host_wdata;
+        end
+    end
 
+    assign instr = ram[pc[11:2]]; 
+	
 endmodule

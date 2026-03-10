@@ -25,16 +25,16 @@ r1
 31
 !i10b 1
 !s100 bmZk[dPUhT]i806PCm<l72
-IUXHYA4]Wb033UP5EnI`=L3
+I:Wco4kPRCc@^e`_US_=MY0
 Z3 dC:/USC CE/EE533/Lab8/Network_Processor_Integration/sim
-Z4 w1772947895
-Z5 8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v
-Z6 FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v
+Z4 w1772970216
+Z5 8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/components.v
+Z6 FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/components.v
 L0 487
 Z7 OL;L;10.6e;65
-Z8 !s108 1772947994.000000
-Z9 !s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v|
-Z10 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/components.v|
+Z8 !s108 1773122151.000000
+Z9 !s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/components.v|
+Z10 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/components.v|
 !i113 0
 Z11 o-work work -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R1
@@ -45,7 +45,7 @@ r1
 31
 !i10b 1
 !s100 Ij@ELGDj<naTDR6iaEb_F3
-I78<9[_FNn7WE4D=hUT8i80
+IUWJ8B>;B0SmWhG>iLEYl82
 R3
 R4
 R5
@@ -65,16 +65,16 @@ r1
 31
 !i10b 1
 !s100 m2V;XCmjceXS6g^@iz92Y2
-I;nAR6Z=5WkmD_n][zDDQG0
+I2]X_1fDbDM]NI?GkYWN:A2
 R3
 w1772354798
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/bf16_mac.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/bf16_mac.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/bf16_mac.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/bf16_mac.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/bf16_mac.v|
 !i113 0
 R11
 R1
@@ -85,7 +85,7 @@ r1
 31
 !i10b 1
 !s100 R4a`9<GofI3WkWGFW::fO3
-IRcOT>>SEV=0G?mo?9KM9b1
+I>bLX[7^dAV5AV?6MMjl=o1
 R3
 R4
 R5
@@ -105,7 +105,7 @@ r1
 31
 !i10b 1
 !s100 bb]=LJK:e>AWYc2`bCkD33
-I]bMVWC[hIQiTGFYnk2WP^2
+IKogmmzT]XH0G:Vh[SR6^X0
 R3
 R4
 R5
@@ -119,23 +119,23 @@ R10
 R11
 R1
 vconvertible_fifo
-Z12 !s110 1772947993
+!s110 1773122150
 !i10b 1
 !s100 _aH1Tf5@1lZPi7AZ<mS1]3
-I5b=foY1Ezin9N2bVI6cba0
+ILdj;VUSMKMEa1^aLX@No[1
 R2
 R3
 w1772831175
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/convertible_fifo.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/convertible_fifo.v
 L0 1
 R7
 r1
 !s85 0
 31
-Z13 !s108 1772947993.000000
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/convertible_fifo.v|
+Z12 !s108 1773122150.000000
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/convertible_fifo.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/convertible_fifo.v|
 !i113 0
 R11
 R1
@@ -146,7 +146,7 @@ r1
 31
 !i10b 1
 !s100 m><fb<5B5zcMA@kA2OdH]2
-I93R;ZTSCzoPf`EF;>1KIE1
+IFXUJQTh]D5XFm8DC?MO012
 R3
 R4
 R5
@@ -166,7 +166,7 @@ r1
 31
 !i10b 1
 !s100 Wg9QUQflIU_Aj5of2]<P03
-IO;nBo1DlZoN`iHKb2F<eo2
+IEU@W[Qhj9JWiaBN2J^E6m1
 R3
 R4
 R5
@@ -180,23 +180,23 @@ R10
 R11
 R1
 vdual_port_bram
-R12
+Z13 !s110 1773122151
 !i10b 1
 !s100 `AQeSE=4`dI?@C8zQUiK]0
-I8Zj@<[bH9F8MX<Fd_CS`40
+Izd@f@[d6?PhoQ>X7:@zeM3
 R2
 R3
 w1772831050
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/dual_port_bram.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/dual_port_bram.v
 L0 1
 R7
 r1
 !s85 0
 31
-R13
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/dual_port_bram.v|
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/dual_port_bram.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/dual_port_bram.v|
 !i113 0
 R11
 R1
@@ -207,7 +207,7 @@ r1
 31
 !i10b 1
 !s100 iFSed5J?`M6z58P5S9R:G1
-I>=CzcQGUGJN7Ae3LO5omh3
+I82no?_2nN6Y^K>0b@Dn;c2
 R3
 R4
 R5
@@ -221,28 +221,28 @@ R10
 R11
 R1
 vfifo_control
-!s110 1772947994
+R13
 !i10b 1
 !s100 h_EEJOBe5a]919jVh1]jQ0
-I5C:45<XCiC9B0z7]8X3cN2
+I5J>n<aUdI2<iQgbSU_cDB0
 R2
 R3
 w1772875932
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/fifo_control.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/fifo_control.v
 L0 1
 R7
 r1
 !s85 0
 31
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/fifo_control.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/fifo_control.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/fifo_control.v|
 !i113 0
 R11
 R1
 vfifo_integration_tb
-R12
+!s110 1773108666
 !i10b 1
 !s100 9JB3?61FJ[OT1LFJkmAnj3
 I6oY_dkgD<DKNXjkijc:Y31
@@ -256,7 +256,7 @@ R7
 r1
 !s85 0
 31
-R13
+!s108 1773108666.000000
 !s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/fifo_integration_tb.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/fifo_integration_tb.v|
 !i113 0
@@ -269,16 +269,16 @@ r1
 31
 !i10b 1
 !s100 9]:kMFniN=HG5gXH[O@Xh3
-Ib]b2IH24;MR;:=TIVo^NK3
+I4lGWIKIf9Hjze^QMZog5K1
 R3
 w1772946242
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Control_Unit.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Control_Unit.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Control_Unit.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Control_Unit.v|
 !i113 0
 R11
 R1
@@ -290,16 +290,16 @@ r1
 31
 !i10b 1
 !s100 k0QKTNCSFTn<4E<7XFCY31
-I`IfWj`W^eE8I51GfKYFYK3
+Im<T`YHUfmPc<ehchf6[ek3
 R3
-w1772926630
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v
+w1772970201
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Data_Memory.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Data_Memory.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Data_Memory.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Data_Memory.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Data_Memory.v|
 !i113 0
 R11
 R1
@@ -311,16 +311,16 @@ r1
 31
 !i10b 1
 !s100 dWEQASkbF>QkTNBglYY:C3
-I>LQ6INnJY[KCd722lT`OT3
+IJO@8OXKGPSYX[]3RDPAhb0
 R3
 w1772883441
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Execution_Unit.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Execution_Unit.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Execution_Unit.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Execution_Unit.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Execution_Unit.v|
 !i113 0
 R11
 R1
@@ -332,16 +332,16 @@ r1
 31
 !i10b 1
 !s100 04cdY4>LYdfEf>Wk<>Df60
-I;Fjlnh6[ABnNAPUNFHc8k2
+IDciVbmoeH^VZ>jNJKBEAY3
 R3
-w1772888791
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v
+w1772970194
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Instruction_Memory.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Instruction_Memory.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Instruction_Memory.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Instruction_Memory.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Instruction_Memory.v|
 !i113 0
 R11
 R1
@@ -353,16 +353,16 @@ r1
 31
 !i10b 1
 !s100 Y:J;K>?ZU=1Qng2kb=UfW2
-I@UFM]VIRWa=FobKTE@;jA0
+I^[5Zg`n[^7P3_CJ6BgPBS1
 R3
 w1772928718
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_mem_mux.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_mem_mux.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_mem_mux.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_mem_mux.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_mem_mux.v|
 !i113 0
 R11
 R1
@@ -373,16 +373,16 @@ r1
 31
 !i10b 1
 !s100 @:fXzS0MZL4jbRIZCQ9R^1
-Iaco=VJTjeBj>3BmoU5O9e0
+I]9E^3H8jG34DmDg30GALf1
 R3
 w1772883452
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Pipeline_Reg.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Pipeline_Reg.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Pipeline_Reg.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Pipeline_Reg.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Pipeline_Reg.v|
 !i113 0
 R11
 R1
@@ -394,16 +394,16 @@ r1
 31
 !i10b 1
 !s100 O<?=J`FVCh23Y0EiBY?BR3
-I@I<_e^Ze]aDLn>md3S9980
+IhDHV[55I]M5ViSYVFAeE]1
 R3
 w1772883459
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Program_Counter.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Program_Counter.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Program_Counter.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Program_Counter.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Program_Counter.v|
 !i113 0
 R11
 R1
@@ -415,35 +415,36 @@ r1
 31
 !i10b 1
 !s100 T>[CPd0fWCXR_b6A<zoU71
-IHbh^e<zYQKj:5MC[CRLC=0
+I^9kc6;IiREN`WQH7a_lPE3
 R3
 w1772883464
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Register_File.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Register_File.v
 L0 1
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Register_File.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Register_File.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Register_File.v|
 !i113 0
 R11
 R1
 n@g@p@u_@register_@file
 vgpu_tensor_core_tb
-R2
-r1
-!s85 0
-31
+!s110 1773108668
 !i10b 1
 !s100 :=lidnAN3ZabXIaij@zkj0
 I[KbU36k?]A;6f7X24TgzH0
+R2
 R3
 w1772947951
 8C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v
 FC:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v
 L0 3
 R7
-Z14 !s108 1772947995.000000
+r1
+!s85 0
+31
+!s108 1773108668.000000
 !s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/gpu_tensor_core_tb.v|
 !i113 0
@@ -456,16 +457,36 @@ r1
 31
 !i10b 1
 !s100 al9DQ_2246c1hnGfzNn4m1
-IaQXnbMlMb47g3OT_E0m5E0
+I^JKITK@0SaE^0kD>8W=k:3
 R3
 w1772946027
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_top.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_top.v
 L0 3
 R7
 R8
-!s107 C:\USC CE\EE533\Lab8\Network_Processor_Integration\src\gpu\isa_defines.vh|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/gpu_top.v|
+!s107 C:\USC CE\EE533\Lab8\Network_Processor_Integration\verilog\gpu\isa_defines.vh|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_top.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_top.v|
+!i113 0
+R11
+R1
+vhw_integration_tb
+R2
+r1
+!s85 0
+31
+!i10b 1
+!s100 Cd979EB1U1CdHOl5o<2^`2
+I^=BPj]DGGGdViF0YfC[3?3
+R3
+w1773121606
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/hw_integration_tb.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/hw_integration_tb.v
+L0 3
+R7
+!s108 1773121616.000000
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/hw_integration_tb.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/hw_integration_tb.v|
 !i113 0
 R11
 R1
@@ -476,7 +497,7 @@ r1
 31
 !i10b 1
 !s100 =bT4mVzV74LKV3A0EJEB32
-I?lKO3kPXKfM[RWYUboCF:3
+I5njLV8Sb0FjK8mWICRLd:2
 R3
 R4
 R5
@@ -496,7 +517,7 @@ r1
 31
 !i10b 1
 !s100 k?KglGlQ60DREV9heg]k43
-IVVH8R^c_UmL]k^_G5bJcG3
+IWlBP7L5bCXHQVHSQNH]CG0
 R3
 R4
 R5
@@ -515,8 +536,8 @@ r1
 !s85 0
 31
 !i10b 1
-!s100 jJaAe0aJOY6I^<OoKGPD53
-IAXZm:@XHPS:lQX`NW=dW=0
+!s100 Nin1eb@PIcmjfbI:Nh2hj3
+IbXWUhMB0THd<nCN]PzQcV0
 R3
 R4
 R5
@@ -536,7 +557,7 @@ r1
 31
 !i10b 1
 !s100 >PhAEm4k9fRf2zTog48UC2
-IzJ_FEJU39dTS[kA6V>NUm3
+I^Dj[nnAKZU4>7_2g>md_n3
 R3
 R4
 R5
@@ -556,7 +577,7 @@ r1
 31
 !i10b 1
 !s100 Wm1kejH?JH65[7h8jF<S_2
-IER[70aEoG[LcoY?T1O`7B2
+IzQ@[MMg1NB^mn<8h@[4:Y3
 R3
 R4
 R5
@@ -576,7 +597,7 @@ r1
 31
 !i10b 1
 !s100 :lY_7[E;o<J<ODkL_oP=G2
-IhFcL?z2WYWVi8Q5[K1A:P3
+Ii1_`?CnY<3?1POjcoQzGN3
 R3
 R4
 R5
@@ -596,16 +617,16 @@ r1
 31
 !i10b 1
 !s100 BV81@Z^JlbJ?cK_KB8]d]0
-IiZ0Hdn:c[<`7g3?iJ0YSA0
+I`To3Do]SN>_ANBG_4WbF>1
 R3
-w1772936291
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v
+w1772956785
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/pipelinepc.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/pipelinepc.v
 L0 2
 R7
 R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v|
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/pipelinepc.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/pipelinepc.v|
 !i113 0
 R11
 R1
@@ -616,7 +637,7 @@ r1
 31
 !i10b 1
 !s100 JA^2nn]3ZG4C5O9DNEfib1
-I:NQ=ECL90lb4b4ITaW3Jz0
+I^90cNU^oSk;PF]@D_ARFl1
 R3
 R4
 R5
@@ -630,21 +651,20 @@ R10
 R11
 R1
 vsystem_integration_tb
-!s110 1772947995
+R2
+r1
+!s85 0
+31
 !i10b 1
 !s100 P2]5O_W><PR6z[NPai51j2
 I;XmRA84KlR8Mo`>;]53Cn2
-R2
 R3
 w1772946821
 8C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v
 FC:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v
 L0 3
 R7
-r1
-!s85 0
-31
-R14
+R12
 !s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v|
 !i113 0
@@ -657,16 +677,16 @@ r1
 31
 !i10b 1
 !s100 K@jBgmH6?^_VI49mJ^MFM0
-ID9R9g`1d^CZ0SZnnC<Y5^3
+IW9Lf1SX:gUE]UO^V8nk3o0
 R3
 w1772354779
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/Tensor_Unit.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/Tensor_Unit.v
 L0 1
 R7
-R8
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v|
+!s108 1773122152.000000
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/Tensor_Unit.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/Tensor_Unit.v|
 !i113 0
 R11
 R1
@@ -678,16 +698,16 @@ r1
 31
 !i10b 1
 !s100 @Mj3=zZ;OGfld:O6G0]5G3
-I2^dSfJNQO]X[7QFDnDF2T3
+IMaKoZaZ_1?>6emcMTN;nm3
 R3
 w1772937615
-8C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v
-FC:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v
+8C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/user_datapath.v
+FC:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/user_datapath.v
 L0 1
 R7
-R14
-!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v|
-!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v|
+R8
+!s107 C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/user_datapath.v|
+!s90 -reportprogress|300|-work|work|-vopt|-stats=none|C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/user_datapath.v|
 !i113 0
 R11
 R1

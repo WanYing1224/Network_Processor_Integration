@@ -185,7 +185,13 @@ module Processor_Integration #(
         else       gpu_start_d <= gpu_start; 
     end
     wire gpu_start_pulse = gpu_start & ~gpu_start_d;
-
+	
+	// --- Host PC Bootloader Routing Logic for GPU ---
+	// NetFPGA reset is Active HIGH, meaning reset==1 when halted
+	wire host_write_req   = (reset) && (reg_mem_cmd == 32'd1); 
+    wire host_to_gpu_imem = host_write_req && (reg_mem_addr[31:28] == 4'h2);
+    wire host_to_gpu_dmem = host_write_req && (reg_mem_addr[31:28] == 4'h3);
+	
     // Custom Tensor GPU Core
     gpu_top GPU_Core (
         .clk           (clk),
@@ -198,7 +204,11 @@ module Processor_Integration #(
         .gpu_mem_wdata (gpu_core_wdata),
         .gpu_mem_rdata (mux_to_gpu_rdata),
         
-        .gpu_done      (gpu_done)
+        .gpu_done      (gpu_done), 
+		
+		.host_wen      (host_to_gpu_imem),
+        .host_addr     (reg_mem_addr),
+        .host_wdata    (reg_mem_wdata)
     );
 
     // Multi-core Memory Arbiter
@@ -233,10 +243,15 @@ module Processor_Integration #(
     // Shared Dual-Port 64-bit BRAM
     GPU_Data_Memory Shared_Memory (
         .clk       (clk),
+		.rstb      (~reset),
         .be        (mux_to_bram_be),
         .addr      (mux_to_bram_addr),
         .write_data(mux_to_bram_wdata),
-        .read_data (bram_to_mux_rdata)
+        .read_data (bram_to_mux_rdata),
+		
+		.host_wen  (host_to_gpu_dmem),
+        .host_addr (reg_mem_addr),
+        .host_wdata(reg_mem_wdata)
     );
 
 endmodule

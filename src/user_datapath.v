@@ -38,6 +38,16 @@ module user_datapath #(
     wire        stall_arm;
     wire        gpu_start;
     wire        gpu_done;
+	
+    // HOST PC BOOTLOADER ROUTING 
+    wire [31:0] sw_reset_wire;
+    wire [31:0] sw_mem_addr_wire;
+    wire [31:0] sw_mem_wdata_wire;
+    wire [31:0] sw_mem_cmd_wire;
+
+    wire host_write_req   = (sw_mem_cmd_wire == 32'd1); 
+    wire host_to_gpu_imem = host_write_req && (sw_mem_addr_wire[31:28] == 4'h2);
+    wire host_to_gpu_dmem = host_write_req && (sw_mem_addr_wire[31:28] == 4'h3);
 
     // Block: ARM ISA CPU
     pipelinepc ARM_Core (
@@ -48,10 +58,10 @@ module user_datapath #(
         .stall_from_gpu(stall_arm),
 		
 		// Explicitly tie off all unused software inputs to 0
-		.sw_reset(32'd0),        
-        .sw_mem_addr(32'd0),     
-        .sw_mem_wdata(32'd0),    
-        .sw_mem_cmd(32'd0),      
+		.sw_reset(sw_reset_wire),        
+        .sw_mem_addr(sw_mem_addr_wire),     
+        .sw_mem_wdata(sw_mem_wdata_wire),    
+        .sw_mem_cmd(sw_mem_cmd_wire),      
         
         // Memory-Mapped Ports to GPU Arbiter
         .gpu_mem_we(arm_mem_we),
@@ -92,7 +102,11 @@ module user_datapath #(
         .gpu_mem_wdata(gpu_core_wdata),
         .gpu_mem_rdata(mux_to_gpu_rdata),
         
-        .gpu_done(gpu_done)
+        .gpu_done(gpu_done),
+		
+		.host_wen(host_to_gpu_imem),
+        .host_addr(sw_mem_addr_wire),
+        .host_wdata(sw_mem_wdata_wire)
     );
 
     // Block: The Top Left MUX
@@ -126,10 +140,15 @@ module user_datapath #(
     // Block: Shared BRAM
     GPU_Data_Memory Shared_Memory (
         .clk(clk),
+		.rstb(rstb),
         .be(mux_to_bram_be),
         .addr(mux_to_bram_addr),
         .write_data(mux_to_bram_wdata),
-        .read_data(bram_to_mux_rdata)
+        .read_data(bram_to_mux_rdata),
+		
+		.host_wen(host_to_gpu_dmem),
+        .host_addr(sw_mem_addr_wire),
+        .host_wdata(sw_mem_wdata_wire)
     );
 
 endmodule
