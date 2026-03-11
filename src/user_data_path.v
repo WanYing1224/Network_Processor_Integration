@@ -357,42 +357,79 @@ module user_data_path #(
 		 // --- Misc
 		.clk                  (clk),
 		.reset                (reset));
+	
+	generic_regs #(
+        .UDP_REG_SRC_WIDTH   (UDP_REG_SRC_WIDTH),
+        .TAG                 (`IDS_BLOCK_ADDR),
+        .REG_ADDR_WIDTH      (`IDS_REG_ADDR_WIDTH),
+        .NUM_COUNTERS        (0),
+        .NUM_SOFTWARE_REGS   (4),
+        .NUM_HARDWARE_REGS   (0)
+    ) bootloader_registers (
+        .reg_req_in          (ids_in_reg_req),
+        .reg_ack_in          (ids_in_reg_ack),
+        .reg_rd_wr_L_in      (ids_in_reg_rd_wr_L),
+        .reg_addr_in         (ids_in_reg_addr),
+        .reg_data_in         (ids_in_reg_data),
+        .reg_src_in          (ids_in_reg_src),
 
+        .reg_req_out         (pi_in_reg_req),
+        .reg_ack_out         (pi_in_reg_ack),
+        .reg_rd_wr_L_out     (pi_in_reg_rd_wr_L),
+        .reg_addr_out        (pi_in_reg_addr),
+        .reg_data_out        (pi_in_reg_data),
+        .reg_src_out         (pi_in_reg_src),
+
+        // Maps the 4 registers from ids.xml directly to our Verilog wires!
+        .software_regs       ({sw_mem_cmd_wire, sw_mem_wdata_wire, sw_mem_addr_wire, sw_reset_wire}),
+        .hardware_regs       (),
+        .counter_updates     (),
+        .counter_decrement   (),
+
+        .clk                 (clk),
+        .reset               (reset)
+    );
+	
 	Processor_Integration #(
-		.DATA_WIDTH(DATA_WIDTH),
-		.CTRL_WIDTH(CTRL_WIDTH),
-		.UDP_REG_SRC_WIDTH (UDP_REG_SRC_WIDTH)
-	) processor_integration_inst (
-		// --- data path interface
-		.out_data                          (oq_in_data),
-		.out_ctrl                          (oq_in_ctrl),
-		.out_wr                            (oq_in_wr),
-		.out_rdy                           (oq_in_rdy),
-	
-		.in_data                           (ids_in_data),
-		.in_ctrl                           (ids_in_ctrl),
-		.in_wr                             (ids_in_wr),
-		.in_rdy                            (ids_in_rdy),
-	
-		// --- Register interface
-		.reg_req_in                        (ids_in_reg_req),
-		.reg_ack_in                        (ids_in_reg_ack),
-		.reg_rd_wr_L_in                    (ids_in_reg_rd_wr_L),
-		.reg_addr_in                       (ids_in_reg_addr),
-		.reg_data_in                       (ids_in_reg_data),
-		.reg_src_in                        (ids_in_reg_src),
-	
-		.reg_req_out                       (oq_in_reg_req),
-		.reg_ack_out                       (oq_in_reg_ack),
-		.reg_rd_wr_L_out                   (oq_in_reg_rd_wr_L),
-		.reg_addr_out                      (oq_in_reg_addr),
-		.reg_data_out                      (oq_in_reg_data),
-		.reg_src_out                       (oq_in_reg_src),
-	
-		// --- Misc
-		.clk                               (clk),
-		.reset                             (reset)
-	);
+        .DATA_WIDTH(DATA_WIDTH),
+        .CTRL_WIDTH(CTRL_WIDTH),
+        .UDP_REG_SRC_WIDTH (UDP_REG_SRC_WIDTH)
+    ) ids (
+        // data path interface
+        .out_data            (oq_in_data),
+        .out_ctrl            (oq_in_ctrl),
+        .out_wr              (oq_in_wr),
+        .out_rdy             (oq_in_rdy),
+        .in_data             (ids_in_data),
+        .in_ctrl             (ids_in_ctrl),
+        .in_wr               (ids_in_wr),
+        .in_rdy              (ids_in_rdy),
+/*
+        // CONNECT THE BOOTLOADER WIRES
+        .sw_reset_wire       (sw_reset_wire),
+        .sw_mem_addr_wire    (sw_mem_addr_wire),
+        .sw_mem_wdata_wire   (sw_mem_wdata_wire),
+        .sw_mem_cmd_wire     (sw_mem_cmd_wire),
+*/
+        // Register interface (Using the intermediate wires)
+        .reg_req_in          (pi_in_reg_req),
+        .reg_ack_in          (pi_in_reg_ack),
+        .reg_rd_wr_L_in      (pi_in_reg_rd_wr_L),
+        .reg_addr_in         (pi_in_reg_addr),
+        .reg_data_in         (pi_in_reg_data),
+        .reg_src_in          (pi_in_reg_src),
+
+        .reg_req_out         (oq_in_reg_req),
+        .reg_ack_out         (oq_in_reg_ack),
+        .reg_rd_wr_L_out     (oq_in_reg_rd_wr_L),
+        .reg_addr_out        (oq_in_reg_addr),
+        .reg_data_out        (oq_in_reg_data),
+        .reg_src_out         (oq_in_reg_src),
+
+        // --- Misc
+        .clk                 (clk),
+        .reset               (reset)
+    );
    
 	output_queues #(
 		.DATA_WIDTH(DATA_WIDTH),

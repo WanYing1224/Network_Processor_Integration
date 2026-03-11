@@ -12,14 +12,14 @@ module GPU_Instruction_Memory #(
 );
     
 	(* ram_style = "block" *) reg [31:0] ram [0:MEM_DEPTH-1];
-	
+/*	
 	integer i;
     initial begin
         for(i = 0; i < MEM_DEPTH; i = i + 1) begin
             ram[i] = 32'd0; // Fills memory with 0s instead of Xs
         end
     end
-
+*/
     always @(posedge clk) begin
         if (host_wen) begin
             ram[host_addr[11:2]] <= host_wdata;

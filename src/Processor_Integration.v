@@ -96,8 +96,8 @@ module Processor_Integration #(
 
     generic_regs #( 
         .UDP_REG_SRC_WIDTH   (UDP_REG_SRC_WIDTH),
-        .TAG                 (`CPU_BLOCK_ADDR),     
-        .REG_ADDR_WIDTH      (`CPU_REG_ADDR_WIDTH),     
+        .TAG                 (`IDS_BLOCK_ADDR),     
+        .REG_ADDR_WIDTH      (`IDS_REG_ADDR_WIDTH),     
         .NUM_COUNTERS        (0),            
         .NUM_SOFTWARE_REGS   (4), 
         .NUM_HARDWARE_REGS   (3)

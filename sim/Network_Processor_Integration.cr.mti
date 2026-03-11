@@ -52,13 +52,6 @@ Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 Top level modules:
 	fifo_control
 
-} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v}
-Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
--- Compiling module user_datapath
-
-Top level modules:
-	user_datapath
-
 } {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/Tensor_Unit.v}
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module Tensor_Unit
@@ -66,19 +59,19 @@ Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 Top level modules:
 	Tensor_Unit
 
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/user_datapath.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module user_datapath
+
+Top level modules:
+	user_datapath
+
 } {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/gpu/GPU_Control_Unit.v}
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
 -- Compiling module GPU_Control_Unit
 
 Top level modules:
 	GPU_Control_Unit
-
-} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/hw_integration_tb.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/hw_integration_tb.v}
-Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
--- Compiling module hw_integration_tb
-
-Top level modules:
-	hw_integration_tb
 
 } {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/src/arm_cpu/pipelinepc.v}
 Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018

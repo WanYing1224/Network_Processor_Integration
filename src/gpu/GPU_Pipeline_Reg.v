@@ -11,16 +11,23 @@ module GPU_Pipeline_Reg #(
 );
 
     always @(posedge clk or posedge rst) 
-	begin
-        if(rst || flush) 
-		begin
+    begin
+        if (rst) 
+        begin
+            // Asynchronous Reset: ONLY rst goes here
             q <= {WIDTH{1'b0}};
         end 
-		
-		else if(!stall) 
-		begin
+        else if (flush) 
+        begin
+            // Synchronous Flush: Happens on the clock edge
+            q <= {WIDTH{1'b0}};
+        end
+        else if (!stall) 
+        begin
+            // Normal operation if not stalled
             q <= d;
         end
+        // If stalled and not flushed, q implicitly holds its value
     end
 	
 endmodule

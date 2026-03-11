@@ -1,0 +1,153 @@
+{C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/bf16_mac.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/bf16_mac.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module bf16_mac
+
+Top level modules:
+	bf16_mac
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Program_Counter.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Program_Counter.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module GPU_Program_Counter
+
+Top level modules:
+	GPU_Program_Counter
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/testbench/system_integration_tb.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module system_integration_tb
+
+Top level modules:
+	system_integration_tb
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_mem_mux.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_mem_mux.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module gpu_mem_mux
+
+Top level modules:
+	gpu_mem_mux
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/convertible_fifo.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/convertible_fifo.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module convertible_fifo
+
+Top level modules:
+	convertible_fifo
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Data_Memory.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Data_Memory.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module GPU_Data_Memory
+
+Top level modules:
+	GPU_Data_Memory
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Pipeline_Reg.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Pipeline_Reg.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module GPU_Pipeline_Reg
+
+Top level modules:
+	GPU_Pipeline_Reg
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Execution_Unit.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Execution_Unit.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module GPU_Execution_Unit
+
+Top level modules:
+	GPU_Execution_Unit
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Register_File.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Register_File.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module GPU_Register_File
+
+Top level modules:
+	GPU_Register_File
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/dual_port_bram.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/dual_port_bram.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module dual_port_bram
+
+Top level modules:
+	dual_port_bram
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/fifo_control.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/fifo_control.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module fifo_control
+
+Top level modules:
+	fifo_control
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/components.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/components.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module pc
+-- Compiling module imem_bram
+-- Compiling module if_id_reg
+-- Compiling module control_unit
+-- Compiling module register_file
+-- Compiling module imm_gen
+-- Compiling module id_ex_reg
+-- Compiling module alu
+-- Compiling module condition_check
+-- Compiling module cpsr_array
+-- Compiling module data_memory
+-- Compiling module ex_mem_reg
+-- Compiling module mem_wb_reg
+-- Compiling module barrel_shifter
+
+Top level modules:
+	pc
+	imem_bram
+	if_id_reg
+	control_unit
+	register_file
+	imm_gen
+	id_ex_reg
+	alu
+	condition_check
+	cpsr_array
+	data_memory
+	ex_mem_reg
+	mem_wb_reg
+	barrel_shifter
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/Tensor_Unit.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/Tensor_Unit.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module Tensor_Unit
+
+Top level modules:
+	Tensor_Unit
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/user_datapath.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/user_datapath.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module user_datapath
+
+Top level modules:
+	user_datapath
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Control_Unit.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Control_Unit.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module GPU_Control_Unit
+
+Top level modules:
+	GPU_Control_Unit
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/pipelinepc.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/arm_cpu/pipelinepc.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module pipelinepc
+
+Top level modules:
+	pipelinepc
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Instruction_Memory.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/GPU_Instruction_Memory.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module GPU_Instruction_Memory
+
+Top level modules:
+	GPU_Instruction_Memory
+
+} {} {}} {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_top.v} {1 {vlog -work work -vopt -stats=none {C:/USC CE/EE533/Lab8/Network_Processor_Integration/verilog/gpu/gpu_top.v}
+Model Technology ModelSim SE-64 vlog 10.6e Compiler 2018.06 Jun 23 2018
+-- Compiling module gpu_top
+
+Top level modules:
+	gpu_top
+
+} {} {}}

@@ -64,30 +64,30 @@ module imem_bram (
     input  wire        rstb,
     input  wire [1:0]  thread_id,
     input  wire [10:0] addr,
-    output reg  [31:0] inst,
+    output wire [31:0] inst,
     
     // Host PC Programming Ports
     input  wire        wen,
     input  wire [31:0] din
 );
     (* ram_style = "block" *) reg [31:0] imem [0:1023];
-	
+/*	
 	integer i;
     initial begin
         for(i = 0; i < 1024; i = i + 1) begin
             imem[i] = 32'd0;
         end
     end
-
+*/
     always @(posedge clk) begin
         if (wen) begin
             imem[addr] <= din; // Host PC writes directly to the address
         end
     end
 
-    always @(*) begin
-        inst = imem[addr];     // CPU reads instruction
-    end
+    //always @(*) begin
+    assign inst = imem[addr];     // CPU reads instruction
+    //end
 endmodule
 
 // ==========================================
@@ -601,7 +601,7 @@ module data_memory (
     input  wire        mem_write,
     input  wire [31:0] addr,       
     input  wire [31:0] write_data, 
-    output reg  [31:0] read_data,
+    output wire [31:0] read_data,
     input  wire [1:0]  thread_id,
     
     // Host PC Programming Ports
@@ -610,14 +610,14 @@ module data_memory (
     input  wire [31:0] host_wdata
 );
     reg [31:0] dmem [0:4095];
-	
+/*	
 	integer i;
     initial begin
         for(i = 0; i < 4096; i = i + 1) begin
             dmem[i] = 32'd0;
         end
     end
-    
+*/    
     // THE HARDWARE FIREWALL
 	wire is_host_route = host_wen && (host_addr[31:28] == 4'h1);
 	
@@ -632,10 +632,8 @@ module data_memory (
         end
     end
 
-    // Combinational read
-    always @(*) begin
-        read_data = dmem[actual_addr];
-    end
+    assign read_data = dmem[actual_addr];
+
 endmodule
 
 // ==========================================

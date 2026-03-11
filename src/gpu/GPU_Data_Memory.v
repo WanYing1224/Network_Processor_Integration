@@ -6,7 +6,7 @@ module GPU_Data_Memory #(
     input  wire [7:0]  be,
     input  wire [31:0] addr,
     input  wire [63:0] write_data,
-    output reg  [63:0] read_data,
+    output wire [63:0] read_data,
 
     // Host PC Programming Ports
     input  wire        host_wen,
@@ -15,14 +15,14 @@ module GPU_Data_Memory #(
 );
     
 	(* ram_style = "block" *) reg [63:0] ram [0:DEPTH-1];
-	
+/*	
 	integer i;
     initial begin
         for(i = 0; i < DEPTH; i = i + 1) begin
             ram[i] = 64'd0; // Note: This is 64-bit!
         end
     end
-
+*/
     // Multiplexer Logic: If system is in Reset (rstb == 0), Host PC takes over!
     wire        actual_wen   = (host_wen) ? 1'b1 : (|be);
     wire [31:0] actual_addr  = (host_wen) ? host_addr : addr;
@@ -45,8 +45,8 @@ module GPU_Data_Memory #(
     end
 
     // Normal Read
-    always @(*) begin
-        read_data = ram[ (host_wen) ? host_addr[11:3] : addr[11:3] ];
-    end
+
+    assign read_data = ram[ (host_wen) ? host_addr[11:3] : addr[11:3] ];
+
 	
 endmodule
