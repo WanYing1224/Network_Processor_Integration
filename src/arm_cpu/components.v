@@ -64,7 +64,7 @@ module imem_bram (
     input  wire        rstb,
     input  wire [1:0]  thread_id,
     input  wire [10:0] addr,
-    output wire [31:0] inst,
+    output reg  [31:0] inst,
     
     // Host PC Programming Ports
     input  wire        wen,
@@ -83,11 +83,9 @@ module imem_bram (
         if (wen) begin
             imem[addr] <= din; // Host PC writes directly to the address
         end
-    end
 
-    //always @(*) begin
-    assign inst = imem[addr];     // CPU reads instruction
-    //end
+		inst <= imem[addr];     // CPU reads instruction
+    end
 endmodule
 
 // ==========================================
@@ -601,7 +599,7 @@ module data_memory (
     input  wire        mem_write,
     input  wire [31:0] addr,       
     input  wire [31:0] write_data, 
-    output wire [31:0] read_data,
+    output reg  [31:0] read_data,
     input  wire [1:0]  thread_id,
     
     // Host PC Programming Ports
@@ -630,9 +628,9 @@ module data_memory (
         if (actual_wen) begin
             dmem[actual_addr] <= actual_wdata;
         end
-    end
 
-    assign read_data = dmem[actual_addr];
+		read_data <= dmem[actual_addr];
+	end
 
 endmodule
 
