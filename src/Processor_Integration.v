@@ -147,6 +147,13 @@ module Processor_Integration #(
     wire        stall_arm;
     wire        gpu_start;
     wire        gpu_done;
+	
+	// --- Host PC Bootloader Routing Logic for GPU ---
+	// NetFPGA reset is Active HIGH, meaning reset==1 when halted
+	wire host_write_req   = (reset) && (reg_mem_cmd == 32'd1); 
+	wire host_to_arm_imem = host_write_req && (reg_mem_addr[31:28] == 4'h0);
+    wire host_to_gpu_imem = host_write_req && (reg_mem_addr[31:28] == 4'h2);
+    wire host_to_gpu_dmem = host_write_req && (reg_mem_addr[31:28] == 4'h3);
 
     // ARM Core CPU
     pipelinepc ARM_Core (
@@ -161,6 +168,7 @@ module Processor_Integration #(
         .hw_mem_rdata  (reg_mem_rdata),
         .hw_pc         (reg_pc),
         .hw_instr      (reg_instr),
+		.host_wen      (host_to_arm_imem),
         
         // FIFO Interconnect
         .fifo_mode_en  (cpu_mode_en),
@@ -185,12 +193,6 @@ module Processor_Integration #(
         else       gpu_start_d <= gpu_start; 
     end
     wire gpu_start_pulse = gpu_start & ~gpu_start_d;
-	
-	// --- Host PC Bootloader Routing Logic for GPU ---
-	// NetFPGA reset is Active HIGH, meaning reset==1 when halted
-	wire host_write_req   = (reset) && (reg_mem_cmd == 32'd1); 
-    wire host_to_gpu_imem = host_write_req && (reg_mem_addr[31:28] == 4'h2);
-    wire host_to_gpu_dmem = host_write_req && (reg_mem_addr[31:28] == 4'h3);
 	
     // Custom Tensor GPU Core
     gpu_top GPU_Core (

@@ -78,26 +78,28 @@ pc PC (
     .current_pc(current_pc)
 );
 
-assign hw_pc = {23'd0, current_pc};
+assign hw_pc = {21'd0, current_pc, 2'b00};
 
 // =====================================================
 // Instruction Memory (IMEM)
 // =====================================================
 wire [31:0] inst;
+
 // Multiplexer to choose between software programming address and hardware PC
-wire [10:0] actual_imem_addr = (!sys_rstb) ? sw_mem_addr[10:0] : {2'b00, current_pc};
-wire        actual_imem_wen  = (!sys_rstb) ? (sw_mem_cmd == 32'd1) : 1'b0; 
-wire [31:0] actual_imem_wdata = (!sys_rstb) ? sw_mem_wdata : 32'd0;
+wire is_programming = (sw_reset != 32'd0);
+wire [10:0] actual_imem_addr = (is_programming) ? sw_mem_addr[10:0] : {2'b00, current_pc};
+wire        actual_imem_wen  = (is_programming) ? (sw_mem_cmd == 32'd1) : 1'b0;
+wire [31:0] actual_imem_wdata = (is_programming) ? sw_mem_wdata : 32'd0;
 
 imem_bram IMEM (
     .clk(clk),
-    .rstb(sys_rstb),
+    .rstb(rstb),
     .thread_id(thread_id),
-    .addr(host_to_arm_imem ? sw_mem_addr[10:0] : {2'b00, current_pc}),
+    .addr(actual_imem_addr),
     .inst(inst),
     // Host PC Ports
-    .wen(host_to_arm_imem),
-    .din(sw_mem_wdata)
+    .wen(actual_imem_wen),
+    .din(actual_imem_wdata)
 );
 	
 assign hw_instr = inst;

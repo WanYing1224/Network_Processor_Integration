@@ -46,6 +46,7 @@ module user_datapath #(
     wire [31:0] sw_mem_cmd_wire;
 
     wire host_write_req   = (sw_mem_cmd_wire == 32'd1); 
+	wire host_to_arm_imem = host_write_req && (sw_mem_addr_wire[31:28] == 4'h0);
     wire host_to_gpu_imem = host_write_req && (sw_mem_addr_wire[31:28] == 4'h2);
     wire host_to_gpu_dmem = host_write_req && (sw_mem_addr_wire[31:28] == 4'h3);
 
