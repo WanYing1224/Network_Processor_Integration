@@ -2,51 +2,52 @@ module GPU_Data_Memory #(
     parameter DEPTH = 512
 )(
     input  wire        clk,
-    input  wire        rstb,          // Added reset to detect Host PC mode
+    input  wire        rstb,         // Added reset to detect Host PC mode
     input  wire [7:0]  be,
     input  wire [31:0] addr,
     input  wire [63:0] write_data,
-    output wire [63:0] read_data,
+    output reg  [63:0] read_data,
 
     // Host PC Programming Ports
     input  wire        host_wen,
     input  wire [31:0] host_addr,
     input  wire [31:0] host_wdata
 );
-    
-	(* ram_style = "block" *) reg [63:0] ram [0:DEPTH-1];
-/*	
-	integer i;
-    initial begin
-        for(i = 0; i < DEPTH; i = i + 1) begin
-            ram[i] = 64'd0; // Note: This is 64-bit!
-        end
-    end
-*/
-    // Multiplexer Logic: If system is in Reset (rstb == 0), Host PC takes over!
-    wire        actual_wen   = (host_wen) ? 1'b1 : (|be);
-    wire [31:0] actual_addr  = (host_wen) ? host_addr : addr;
-    
-    // PCIe is 32-bit, BRAM is 64-bit. We pad the top half with zeros.
-    wire [63:0] actual_wdata = (host_wen) ? {32'd0, host_wdata} : write_data;
+
+    // Force Xilinx to map this array to dedicated Block RAM
+    (* ram_style = "block" *) reg [63:0] ram [0:DEPTH-1];
+
+    // =========================================================
+    // PORT A: Host PC Bootloader (32-to-64 Bit Packing)
+    // =========================================================
+    reg [31:0] lower_half_buffer;
 
     always @(posedge clk) begin
         if (host_wen) begin
-            // 🌟 THE PACKER: Use bit [2] of the address to write the upper or lower half!
-            if (host_addr[2] == 1'b0)
-                ram[host_addr[11:3]][31:0]  <= host_wdata;
-            else
-                ram[host_addr[11:3]][63:32] <= host_wdata;
-        end 
-        else if (|be) begin
-            // Normal 64-bit operation for the GPU and ARM
-            ram[addr[11:3]] <= write_data;
+            // THE PACKER: Use bit [2] of the address to write the upper or lower half!
+            if (host_addr[2] == 1'b0) begin
+                // Hold the lower 32 bits (Address + 0) in the staging buffer
+                lower_half_buffer <= host_wdata;
+            end 
+            else begin
+                // When the upper 32 bits arrive (Address + 4), write the FULL 64-bit word
+                ram[host_addr[11:3]] <= {host_wdata, lower_half_buffer};
+            end
         end
     end
 
-    // Normal Read
+    // =========================================================
+    // PORT B: GPU & ARM Core (Runtime 64-Bit Operation)
+    // =========================================================
+    always @(posedge clk) begin
+        if (|be) begin
+            // Normal 64-bit write operation for the GPU and ARM
+            ram[addr[11:3]] <= write_data;
+        end
+        
+        // Synchronous Read: Mapped directly to Port B output
+        // (Since the bootloader only writes and never reads, we don't need a read multiplexer here)
+        read_data <= ram[addr[11:3]];
+    end
 
-    assign read_data = ram[ (host_wen) ? host_addr[11:3] : addr[11:3] ];
-
-	
 endmodule

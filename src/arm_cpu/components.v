@@ -310,7 +310,8 @@ module register_file (rg1, rg2, wd, wa, wen, w_thread, thread, r1data, r2data, c
     output wire [31:0] r1data, r2data;
 
     // Total 64 registers (16 registers per thread * 4 threads)
-    reg [31:0] regfile [0:63];
+    (* ram_style = "distributed" *) reg [31:0] regfile [0:63];
+	
     wire [5:0] r1, r2, w1;
     assign r1 = {thread, rg1};
     assign r2 = {thread, rg2};
@@ -335,9 +336,20 @@ module register_file (rg1, rg2, wd, wa, wen, w_thread, thread, r1data, r2data, c
     end
 
     always @(posedge clk) begin
-       if(wen)begin
-            regfile[w1] <= wd;
-       end
+		if(rst) begin
+			for (i = 0; i < 64; i = i + 1) begin
+                regfile[i] <= 32'b0;
+            end
+			
+            regfile[13] <= 32'h0000_0FFC; 
+            regfile[29] <= 32'h0000_0FFC; 
+            regfile[45] <= 32'h0000_0FFC; 
+            regfile[61] <= 32'h0000_0FFC;
+		end
+		
+		else if(wen)begin
+			regfile[w1] <= wd;
+		end
     end
 endmodule
 
@@ -551,40 +563,27 @@ endmodule
 // 10. CPSR Array (Thread Flags)
 // ==========================================
 module cpsr_array (clk, rstb, thread_id, update_en, alu_flags, curr_flags);
-    input  wire       clk;
-    input  wire       rstb;
-    input  wire [1:0] thread_id;  
-    input  wire       update_en;  
-    input  wire [3:0] alu_flags;  
-    output reg  [3:0] curr_flags;  
+    input  wire       clk, rstb, update_en;
+    input  wire [1:0] thread_id;
+    input  wire [3:0] alu_flags;
+    output wire [3:0] curr_flags; // Changed to wire for async read
 
-    // Individual condition registers for each thread
-    reg [3:0] cpsr_reg_0, cpsr_reg_1, cpsr_reg_2, cpsr_reg_3;
+    // Array declaration allows Distributed RAM inference
+    (* ram_style = "distributed" *) reg [3:0] cpsr_reg [0:3];
 
-    always @(*) begin
-        case (thread_id)
-            2'b00: curr_flags = cpsr_reg_0;
-            2'b01: curr_flags = cpsr_reg_1;
-            2'b10: curr_flags = cpsr_reg_2;
-            2'b11: curr_flags = cpsr_reg_3;
-            default: curr_flags = 4'b0000;
-        endcase
-    end
+    // Asynchronous Read (essential for pipeline timing)
+    assign curr_flags = cpsr_reg[thread_id];
 
-    always @(posedge clk or negedge rstb) begin
+    // Synchronous Reset (required to use LUT-RAM)
+    always @(posedge clk) begin
         if (!rstb) begin
-            cpsr_reg_0 <= 4'b0000;
-            cpsr_reg_1 <= 4'b0000;
-            cpsr_reg_2 <= 4'b0000;
-            cpsr_reg_3 <= 4'b0000;
+            cpsr_reg[0] <= 4'b0;
+            cpsr_reg[1] <= 4'b0;
+            cpsr_reg[2] <= 4'b0;
+            cpsr_reg[3] <= 4'b0;
         end 
         else if (update_en) begin
-            case (thread_id)
-                2'b00: cpsr_reg_0 <= alu_flags;
-                2'b01: cpsr_reg_1 <= alu_flags;
-                2'b10: cpsr_reg_2 <= alu_flags;
-                2'b11: cpsr_reg_3 <= alu_flags;
-            endcase
+            cpsr_reg[thread_id] <= alu_flags;
         end
     end
 endmodule
